@@ -1,0 +1,220 @@
+/*! CSSTools Copyright (C) 2013 Sagalov Dmitriy
+ * This program comes with ABSOLUTELY NO WARRANTY.
+ * This is free software, and you are welcome to redistribute it
+ * under certain conditions; show http://www.gnu.org/licenses/gpl-3.0.html for details.
+ */
+
+#cssTools .clearfix {*zoom: 1;}
+#cssTools .clearfix:before,
+#cssTools .clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+#cssTools .clearfix:after {clear: both;}
+#cssTools .hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+/* Main */
+#cssTools {
+	color: #333;
+	font: 13px/1.5em Arial, sans-serif;
+	
+	z-index: 9999;
+	
+	top: 50px;
+	right: 100px;
+	position: fixed;
+	
+	background: #fff;
+	border: 1px solid #999;
+	
+	width: 260px;
+	
+	margin: 0;
+	padding: 0 0 10px;
+	
+	-webkit-box-shadow: 0 0 15px #000;
+	-moz-box-shadow: 0 0 15px #000;
+	box-shadow: 0 0 15px #000;
+}
+
+#cssTools .cssTools-title {
+	display: block;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAIAAAD9MqGbAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo0NkUxMjJCNTA0ODVFMjExQTc2MEJGQzY5RThEMjFBOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBQTUwOEE4MDg1MDgxMUUyQUREQzhBNjc3OENCMjc0QSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBQTUwOEE3Rjg1MDgxMUUyQUREQzhBNjc3OENCMjc0QSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgV2luZG93cyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjQ3RTEyMkI1MDQ4NUUyMTFBNzYwQkZDNjlFOEQyMUE5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjQ2RTEyMkI1MDQ4NUUyMTFBNzYwQkZDNjlFOEQyMUE5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+7oAEWgAAAltJREFUeNpkVLFuE0EQndk7EwmdlURCAkeKcL4AfwDCDdAECdJQUBDgB+x8ATENdIgC2tgWP5DCVYKFaakifsA0dAHbQpGQ7B3em/UJi5ws7+zOvpk3b+ZObzcawSzzX75i5DHml4xKuaUB2JP9fTULIkEsRP8XURNGhG0GO7MYbOmaz2bfer08c8fjZy80SARAuMUSTRVrMDcMx9ipRixfXr9B2pAxmznAMUI8buIS8loknsdKDy7gVmYCziF35ALH7ldDbvF8QaPHIW3iuGFwpmGdzAlfQAJdTH6edzq/j4/jZLLWaGwPh3fv3ZeVp1arfez3l7KxTlJV3P6xt/fn7AyYtVuNOP2FKh/s7oLKYDCoVovmnWZRraKOEF1qdiIa4NNuF7CNVuvay0MKBaoxHrTbYA5kUVTbrQMIZiCo4kjUSiJ2MRph2Wy1nFcSlEqJllwhmIsXEltXCAxk/n2M82x9U/yCy+WSxnIrGumCLhwGaqsRTgvrG3AvphNmSe3hHbY/PWwzlFdhV4gkW8p7tdmEe9Y7coJg5AGW3VyyRaNQhv5ji6yqxfOn037vvPPq4vOoslMH4PrbdxyZGEsghwXhMJJLtoxvdqVe3/40LB4+gsKzbm8+HkeMwQLZszKp04MWUbKkbeZDiTbkOzdvdI84cxRCxRkvxE5PTp16dP6eFsiK58RZQHRONicxhFQep0SpKeNq6p73olTIRFOnXPuQhj4V5R6qoj7wTCnpffYZEvv6/gM6QNE49OWrmEa6NDQZ/s+ZPdzaWr71K6/85W/Cfx8NgP8KMACukbsPduy4LwAAAABJRU5ErkJggg==") left center no-repeat;
+	height: 25px;
+}
+
+/* Close button */
+#cssTools a.cssTools-btn {
+	
+	top: 3px;
+	position: absolute;
+	
+	color: #333;
+	font-size: 13px;
+	text-align: center;
+	line-height: 18px;
+	text-decoration: none;
+	
+	width: 18px;
+	height: 18px;
+	background: #fff;
+	
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	
+	border: 1px solid #999;
+}
+#cssTools a.cssTools-close {
+	right: 3px;
+}
+#cssTools a.cssTools-about {
+	right: 29px;
+}
+#cssTools a.cssTools-copy {
+	right: 55px;
+}
+#cssTools a.cssTools-select {
+	right: 81px;
+}
+
+.ct-hover {
+	outline: 1px dotted red;
+}
+.ct-select {
+	outline: 1px dotted blue;
+}
+
+/* Head, Footer */
+#cssTools .handle,
+#ctFooter {
+	padding: 0 5px;
+}
+#cssTools .handle {
+	cursor: move;
+	
+	height: 25px;
+	line-height: 25px;
+	background: #ddd;
+	border-bottom: 1px solid #999;
+}
+
+/* Content */
+#ctContent {
+	min-height: 70px;
+	padding: 5px 10px;
+}
+
+#ctContent .ct-label {
+	color: #999;
+	font-size: 12px;
+	display: inline-block;
+	line-height: 24px;
+	vertical-align: top;
+}
+
+#ctContent .inline-block,
+#ctContent .inline-blocks >div {display: inline-block;}
+
+#ctContent .radio input[type="radio"],
+#ctContent .checkbox input[type="checkbox"],
+#ctContent input[type="radio"],
+#ctContent input[type="checkbox"] {
+	margin: 4px 0 0 -20px;
+}
+#ctContent textarea,
+#ctContent input[type="text"],
+#ctContent input[type="number"] {
+	border: 1px solid #ccc;
+	
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+#ctContent select,
+#ctContent textarea,
+#ctContent input[type="text"],
+#ctContent input[type="number"] {
+	background: #fff;
+	
+	vertical-align: top;
+	display: inline-block;
+	height: 20px;
+	
+	color: #555;
+	font-size: 13px;
+	line-height: 20px;
+	
+	border: 1px solid #ccc;
+	margin: 0 1px -10px;
+	padding: 1px 0;
+	
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+#ctContent input[type="text"].color {
+	font-size: 12px;
+}
+
+#ctContent select {
+	width: auto;
+	max-width: 150px;
+	height: 24px;
+}
+#ctContent >div >label {
+	display: inline-block;
+	margin: 0;
+	padding: 0 0 0 20px;
+	min-height: 0;
+}
+
+/* >div >div */
+#ctContent >div >div {
+	display: none;
+	padding: 0 0 6px;
+}
+#ctContent >div >div label {
+	color: #999;
+	font-size: 12px;
+	line-height: 24px;
+	
+	width: 75px;
+	margin: 0;
+	padding: 0;
+	margin-right: 5px;
+	
+	float: left;
+	overflow: hidden;
+	text-align: right;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#ctContent >div >div input {
+	width: 50px;
+}
+
+/* #ctContent .inline-blocks */
+
+/* >div >div >div >div */
+#ctContent >div >div >div >div {
+	clear: both;
+	float: left;
+	width: 100%;
+	
+	padding: 3px 0;
+}
+
+
+
+
+
+
