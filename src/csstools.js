@@ -3,11 +3,11 @@
  * This is free software, and you are welcome to redistribute it
  * under certain conditions; show http://www.gnu.org/licenses/gpl-3.0.html for details.
  * 
- * @version 0.1
+ * @version 0.2
  * @license GPLv3, http://www.gnu.org/licenses/gpl-3.0.html
  * @author  Dmitriy Sagalov, [ email: sarmaged@gmail.com; site: http://sarmaged.ru ]
  * @created 2013-02-22
- * @updated 2013-03-15
+ * @updated 2013-03-16
  * @link    http://csstools.ru
  */
 
@@ -15,10 +15,20 @@
 	
 	var m = {
 		
-		version: '1.0',
+		version: 0.2,
+		bookmark: 0.1,
 		html: '<div id="cssTools"><div class="handle"><div class="cssTools-title"></div><a class="cssTools-btn cssTools-about" href="#" id="ctAbout" title="About">?</a><a class="cssTools-btn cssTools-close" href="#" id="ctClose" title="Close">×</a></div><div id="ctDomPathSelect"></div><div id="ctContent"><div id="ctBorder"><label class="checkbox"><input type="checkbox" name="border" value="border.js"> Border</label><div></div></div><div id="ctFont"><label class="checkbox"><input type="checkbox" name="font" value="font.js"> Font</label><div class="clearfix"></div></div><div id="ctFormatting"><label class="checkbox"><input type="checkbox" name="formatting" value="formatting.js"> Formatting</label><div class="clearfix"></div></div></div></div>',
+		about: function(){
+			return '<div id="cssTools-about"><a href="#" class="cssTools-about-close">&times;</a><p><strong>CSSTools v'+ m.version +'</strong> - help for quick site editing.<br/>Copyright (C) 2013 <a href="#" class="mailto:sarmaged@gmail.com">Dmitriy Sagalov</a>, <a href="http://sarmaged.ru" target="_blank">site</a></p><p>This program is free software: you can redistribute it and/or modify<br/>it under the terms of the GNU General Public License as published by<br/>the Free Software Foundation, either version 3 of the License, or<br/>(at your option) any later version.</p><p>This program is distributed in the hope that it will be useful,<br/>but WITHOUT ANY WARRANTY; without even the implied warranty of<br/>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br/>GNU General Public License for more details.</p><p>You should have received a copy of the GNU General Public License<br/>along with this program.  If not, see <a href="http://www.gnu.org/licenses/gpl.html" target="_blank">http://www.gnu.org/licenses/gpl.html</a></p></div>';
+		},
 		
 		init: function(){
+			
+			if( window.CSSTOOLSVERSION && window.CSSTOOLSVERSION < m.bookmark ) {
+				m.alert('Please update your code in the bookmark');
+				return;
+			}
+			
 			$('body').append( m.html );
 			m.dom.reset();
 			m.factoryEvent();
@@ -42,7 +52,7 @@
 		},
 		
 		path:{
-			module: '../modules/' // http://csstools.ru/js/modules/
+			module: 'http://csstools.ru/js/modules/' // http://csstools.ru/js/modules/
 		},
 		
 		dom: {
@@ -53,7 +63,6 @@
 			saveSelects: [], //сохранёные пути
 			
 			cssTools: null,
-			ctSelect: null,
 			ctCopy: null,
 			ctAbout: null,
 			ctClose: null,
@@ -68,7 +77,6 @@
 			reset: function(){
 				
 				m.dom.cssTools = $('#cssTools');
-				m.dom.ctSelect = $('#ctSelect');
 				m.dom.ctCopy = $('#ctCopy');
 				m.dom.ctAbout = $('#ctAbout');
 				m.dom.ctClose = $('#ctClose');
@@ -182,8 +190,34 @@
 			
 		},
 		
+		alert: function( text ){
+			alert( text + 'Your version: ' + window.CSSTOOLSVERSION + '\n' + 'Current version: ' + m.bookmark );
+			document.location.href = "http://csstools.ru";
+		},
+		
+		getCSSTools: function(){
+			return m.dom.cssTools;
+		},
+		
 		getSelectDOM: function(){
 			return m.dom.mySelect;
+		},
+		
+		start: function(){
+			
+			m.dom.cssTools.show();
+			
+			if(!m.flags.factoryEvent) { // если event уже запущен, то пропускаем
+				m.flags.factoryEvent = true;
+				m.ctMenu.startEvent();
+			};
+			
+		},
+		stop: function(){
+			if( m.dom.mySelect !== null ) m.dom.mySelect.removeClass(m.dom.$class.select);
+			m.flags.factoryEvent = false;
+			m.ctMenu.stopEvent();
+			m.dom.cssTools.hide();
 		},
 		
 		save: function( elm ){
@@ -226,10 +260,7 @@
 							jscolor.init();
 							if(m.dom.mySelect !== null) $[$id]('factory', m.dom.mySelect);
 							
-							if(!m.flags.factoryEvent) { // если event уже запущен, то пропускаем
-								m.flags.factoryEvent = true;
-								m.ctMenu.startEvent();
-							}
+							m.start();
 							
 						}
 					}).fail(function(jqxhr, settings, exception) {
@@ -251,7 +282,6 @@
 		
 		factoryEvent: function(){
 			
-			m.dom.ctSelect.click(m.ctMenu.ctSelect);
 			m.dom.ctCopy.click(m.ctMenu.ctCopy);
 			m.dom.ctAbout.click(m.ctMenu.ctAbout);
 			m.dom.ctClose.click(m.ctMenu.ctClose);
@@ -260,7 +290,7 @@
 				m.flags.cssTools = true;
 			}).bind('mouseleave', function(){
 				m.flags.cssTools = false;
-			});;
+			});
 			
 			$('>div >label >:checkbox', m.dom.ctContent).click(m.checkboxClickListener);
 			
@@ -287,12 +317,28 @@
 			ctAbout: function(e){
 				e.preventDefault();
 				
+				$('body').append( m.about() );
+				
+				var domAbout = $('#cssTools-about');
+				
+				domAbout.bind('mouseenter', function(){
+					m.flags.cssTools = true;
+				}).bind('mouseleave', function(){
+					m.flags.cssTools = false;
+				});
+				
+				$('.cssTools-about-close', domAbout).one('click', function(e){
+					e.preventDefault();
+					
+					m.flags.cssTools = false;
+					$('#cssTools-about').remove();
+				})
 				// console.log( 'click ctAbout' );
 			},
 			ctClose: function(e){
 				e.preventDefault();
 				
-				// console.log( 'click ctClose' );
+				m.stop();
 			}
 		},
 		
@@ -305,6 +351,7 @@
 			if(!bool) return hex(rgb[0]) + hex(rgb[1]) + hex(rgb[2]);
 			return [parseInt(rgb[0]), parseInt(rgb[1]), parseInt(rgb[2])];
 		},
+		
 		/*! For Module */
 		setOption: function( obj, value ){
 			

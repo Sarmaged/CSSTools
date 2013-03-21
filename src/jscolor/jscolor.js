@@ -161,7 +161,6 @@ var jscolor = {
 				y += e1.offsetTop;
 			} while(e1 = e1.offsetParent);
 			*/
-			console.log( x, y );
 		}
 		while((e2 = e2.parentNode) && e2.nodeName.toUpperCase() !== 'BODY') {
 			x -= e2.scrollLeft;
@@ -742,16 +741,19 @@ var jscolor = {
 
 			// load images in optimal order
 			switch(modeID) {
-				case 0: var padImg = 'hs.png'; break;
-				case 1: var padImg = 'hv.png'; break;
+				case 0: var padImg = 'hs-png'; break;
+				case 1: var padImg = 'hv-png'; break;
 			}
-			p.padM.style.backgroundImage = "url('"+jscolor.getDir()+"cross.gif')";
-			p.padM.style.backgroundRepeat = "no-repeat";
-			p.sldM.style.backgroundImage = "url('"+jscolor.getDir()+"arrow.gif')";
-			p.sldM.style.backgroundRepeat = "no-repeat";
-			p.pad.style.backgroundImage = "url('"+jscolor.getDir()+padImg+"')";
-			p.pad.style.backgroundRepeat = "no-repeat";
-			p.pad.style.backgroundPosition = "0 0";
+			// p.padM.style.backgroundImage = "url('"+jscolor.getDir()+"cross.gif')";
+			p.padM.className = "cross-gif";
+			// p.padM.style.backgroundRepeat = "no-repeat";
+			// p.sldM.style.backgroundImage = "url('"+jscolor.getDir()+"arrow.gif')";
+			p.sldM.className = "arrow-gif";
+			// p.sldM.style.backgroundRepeat = "no-repeat";
+			// p.pad.style.backgroundImage = "url('"+jscolor.getDir()+padImg+"')";
+			p.pad.className = padImg;
+			// p.pad.style.backgroundRepeat = "no-repeat";
+			// p.pad.style.backgroundPosition = "0 0";
 
 			// place pointers
 			redrawPad();
@@ -944,13 +946,15 @@ var jscolor = {
 		}
 
 		// require images
-		switch(modeID) {
-			case 0: jscolor.requireImage('hs.png'); break;
-			case 1: jscolor.requireImage('hv.png'); break;
-		}
-		jscolor.requireImage('cross.gif');
-		jscolor.requireImage('arrow.gif');
-
+		/* 
+			switch(modeID) {
+				case 0: jscolor.requireImage('hs.png'); break;
+				case 1: jscolor.requireImage('hv.png'); break;
+			}
+			jscolor.requireImage('cross.gif');
+			jscolor.requireImage('arrow.gif');
+		*/
+		
 		this.importColor();
 	}
 

@@ -1,0 +1,13 @@
+javascript :
+window.CSSTOOLSVERSION = 0.1; !window.CSSTOOLSLOAD || void 0 == window.CSSTOOLSLOAD ? (window.CSSTOOLSLOAD = !0, function(){
+	var b = document,
+	d = b.getElementsByTagName("head")[0],
+	c = document.createElement("link");
+	c.setAttribute("rel", "stylesheet");
+	c.setAttribute("href", "//csstools.ru/css/ct.css");
+	d.appendChild(c);
+	b = b.createElement("script");
+	b.setAttribute("type", "text/javascript");
+	b.setAttribute("src", "//csstools.ru/js/ct.js");
+	d.appendChild(b)
+}()) : $.CSSTools('start');
